@@ -1,0 +1,11 @@
+version: "1"
+
+# Test fixture for Phase 5.6 Slice B (rollout diagnostics).
+# This image actually serves on port 3000, but we tell liftwork it
+# listens on 9999 — the rollout watcher should detect "container is up
+# but isn't listening on :9999" via Pod readiness probe failure events
+# and bail in ~9 seconds with an actionable error.
+deploy:
+  port: 9999
+  health_check:
+    path: /
